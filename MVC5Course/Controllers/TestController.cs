@@ -25,5 +25,24 @@ namespace MVC5Course.Controllers
         {
             return View(data);
         }
+
+        public ActionResult CreateProduct()
+        {
+            var db = new FabricsEntities();
+
+            var product = new Product()
+            {
+                ProductName = "Tercel",
+                Active = true,
+                Price = 1999,
+                Stock = 5
+            };
+
+            db.Product.Add(product);
+            db.SaveChanges();
+
+            return View(product);
+        }
+
     }
 }
