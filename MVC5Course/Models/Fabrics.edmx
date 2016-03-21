@@ -140,37 +140,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FabricsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Client">
-          <Key>
-            <PropertyRef Name="ClientId" />
-          </Key>
-          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
-          <Property Name="CreditRating" Type="Double" />
-          <Property Name="XCode" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
-          <Property Name="OccupationId" Type="Int32" />
-          <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Street1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Street2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ZipCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Longitude" Type="Double" />
-          <Property Name="Latitude" Type="Double" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Occupation" Relationship="Self.FK_Client_Occupation" FromRole="Client" ToRole="Occupation" />
-          <NavigationProperty Name="Order" Relationship="Self.fk_Order_ClientId" FromRole="Client" ToRole="Order" />
-        </EntityType>
         <EntityType Name="Occupation">
           <Key>
             <PropertyRef Name="OccupationId" />
           </Key>
           <Property Name="OccupationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OccupationName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Occupation" FromRole="Occupation" ToRole="Client" />
+          <NavigationProperty Name="Client" Relationship="FabricsModel.FK_Client_Occupation" FromRole="Occupation" ToRole="Client" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -181,8 +157,8 @@
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <Property Name="OrderTotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OrderStatus" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Client" Relationship="Self.fk_Order_ClientId" FromRole="Order" ToRole="Client" />
           <NavigationProperty Name="OrderLine" Relationship="Self.fk_OrderLine_OrderId" FromRole="Order" ToRole="OrderLine" />
+          <NavigationProperty Name="Client" Relationship="FabricsModel.fk_Order_ClientId" FromRole="Order" ToRole="Client" />
         </EntityType>
         <EntityType Name="OrderLine">
           <Key>
@@ -205,33 +181,9 @@
           <Property Name="ProductName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="10" Scale="4" />
           <Property Name="Active" Type="Boolean" />
-          <Property Name="Stock" Type="Decimal" Precision="18" Scale="3" />
           <NavigationProperty Name="OrderLine" Relationship="Self.fk_OrderLine_ProductId" FromRole="Product" ToRole="OrderLine" />
+          <Property Name="Stock" Type="Decimal" Precision="18" Scale="3" />
         </EntityType>
-        <Association Name="FK_Client_Occupation">
-          <End Role="Occupation" Type="Self.Occupation" Multiplicity="0..1" />
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Occupation">
-              <PropertyRef Name="OccupationId" />
-            </Principal>
-            <Dependent Role="Client">
-              <PropertyRef Name="OccupationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Order_ClientId">
-          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="ClientId" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_OrderLine_OrderId">
           <End Role="Order" Type="Self.Order" Multiplicity="1" />
           <End Role="OrderLine" Type="Self.OrderLine" Multiplicity="*" />
@@ -257,19 +209,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FabricsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="Occupation" EntityType="Self.Occupation" />
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="OrderLine" EntityType="Self.OrderLine" />
           <EntitySet Name="Product" EntityType="Self.Product" />
-          <AssociationSet Name="FK_Client_Occupation" Association="Self.FK_Client_Occupation">
-            <End Role="Occupation" EntitySet="Occupation" />
-            <End Role="Client" EntitySet="Client" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Order_ClientId" Association="Self.fk_Order_ClientId">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
           <AssociationSet Name="fk_OrderLine_OrderId" Association="Self.fk_OrderLine_OrderId">
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderLine" EntitySet="OrderLine" />
@@ -278,36 +221,70 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderLine" EntitySet="OrderLine" />
           </AssociationSet>
+          <EntitySet Name="Client" EntityType="FabricsModel.Client" />
+          <AssociationSet Name="FK_Client_Occupation" Association="FabricsModel.FK_Client_Occupation">
+            <End Role="Occupation" EntitySet="Occupation" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Order_ClientId" Association="FabricsModel.fk_Order_ClientId">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="CreditRating" Type="Double" />
+          <Property Name="XCode" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="OccupationId" Type="Int32" />
+          <Property Name="TelephoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Street1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Street2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Occupation" Relationship="FabricsModel.FK_Client_Occupation" FromRole="Client" ToRole="Occupation" />
+          <NavigationProperty Name="Order" Relationship="FabricsModel.fk_Order_ClientId" FromRole="Client" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Client_Occupation">
+          <End Type="FabricsModel.Occupation" Role="Occupation" Multiplicity="0..1" />
+          <End Type="FabricsModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Occupation">
+              <PropertyRef Name="OccupationId" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="OccupationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Order_ClientId">
+          <End Type="FabricsModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="FabricsModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FabricsModelStoreContainer" CdmEntityContainer="FabricsEntities">
-          <EntitySetMapping Name="Client">
-            <EntityTypeMapping TypeName="FabricsModel.Client">
-              <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="CreditRating" ColumnName="CreditRating" />
-                <ScalarProperty Name="XCode" ColumnName="XCode" />
-                <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
-                <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
-                <ScalarProperty Name="Street1" ColumnName="Street1" />
-                <ScalarProperty Name="Street2" ColumnName="Street2" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Occupation">
             <EntityTypeMapping TypeName="FabricsModel.Occupation">
               <MappingFragment StoreEntitySet="Occupation">
@@ -341,11 +318,34 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="FabricsModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="FabricsModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street2" ColumnName="Street2" />
+                <ScalarProperty Name="Street1" ColumnName="Street1" />
+                <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+                <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
+                <ScalarProperty Name="XCode" ColumnName="XCode" />
+                <ScalarProperty Name="CreditRating" ColumnName="CreditRating" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -85,7 +85,7 @@ namespace MVC5Course.Controllers
 
         public ActionResult DeleteProduct(int id)
         {
-            var one = db.Product.Find(id);
+            var one = db.Product.Include("OrderLine").FirstOrDefault(p => p.ProductId == id);
 
             //foreach (var item in db.OrderLine.Where(p => p.ProductId == id).ToList())
             //{
@@ -97,13 +97,22 @@ namespace MVC5Course.Controllers
             //    db.OrderLine.Remove(item);
             //}
 
-            db.OrderLine.RemoveRange(one.OrderLine);
+            db.Database.ExecuteSqlCommand(@"DELETE FROM dbo.OrderLine WHERE ProductId=@p0", id);
+            //db.OrderLine.RemoveRange(one.OrderLine);
 
             db.Product.Remove(one);
 
             db.SaveChanges();
 
             return RedirectToAction("ReadProduct");
+        }
+
+        public ActionResult ProductView()
+        {
+            var data = db.Database.SqlQuery<ProductViewModel>(
+                @"SELECT * FROM dbo.Product WHERE Active=@p0 AND ProductName like @p1", true, "%Yellow%");
+
+            return View(data);
         }
     }
 }

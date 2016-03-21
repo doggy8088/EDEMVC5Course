@@ -223,6 +223,7 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>Fabrics.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -315,6 +316,7 @@
     <Content Include="Views\Test\CreateProduct.cshtml" />
     <Content Include="Views\Test\ReadProduct.cshtml" />
     <Content Include="Views\Test\OneProduct.cshtml" />
+    <Content Include="Views\Test\ProductView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
