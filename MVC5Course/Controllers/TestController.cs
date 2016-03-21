@@ -1,6 +1,7 @@
 ﻿using MVC5Course.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
@@ -92,6 +93,10 @@ namespace MVC5Course.Controllers
                         return Content(err.PropertyName + ": " + err.ErrorMessage);
                     }
                 }
+            }
+            catch (DbUpdateException ex)
+            {
+                //ex.InnerException.InnerException.InnerException
             }
 
             return RedirectToAction("ReadProduct");
