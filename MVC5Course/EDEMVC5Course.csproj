@@ -313,6 +313,8 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Test\EDE.cshtml" />
     <Content Include="Views\Test\CreateProduct.cshtml" />
+    <Content Include="Views\Test\ReadProduct.cshtml" />
+    <Content Include="Views\Test\OneProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
