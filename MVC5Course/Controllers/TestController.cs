@@ -67,5 +67,20 @@ namespace MVC5Course.Controllers
             return View(data);
         }
 
+        public ActionResult UpdateProduct(int id)
+        {
+            var one = db.Product.FirstOrDefault(p => p.ProductId == id);
+
+            if (one == null)
+            {
+                return HttpNotFound();
+            }
+
+            one.Price = one.Price * 2;
+
+            db.SaveChanges();
+
+            return RedirectToAction("ReadProduct");
+        }
     }
 }
