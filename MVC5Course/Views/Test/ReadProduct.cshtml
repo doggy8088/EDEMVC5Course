@@ -44,9 +44,9 @@
             @Html.DisplayFor(modelItem => item.Stock)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |*@
+            @Html.ActionLink("Delete", "DeleteProduct", new { id=item.ProductId })
         </td>
     </tr>
 }

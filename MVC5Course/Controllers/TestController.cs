@@ -82,5 +82,28 @@ namespace MVC5Course.Controllers
 
             return RedirectToAction("ReadProduct");
         }
+
+        public ActionResult DeleteProduct(int id)
+        {
+            var one = db.Product.Find(id);
+
+            //foreach (var item in db.OrderLine.Where(p => p.ProductId == id).ToList())
+            //{
+            //    db.OrderLine.Remove(item);
+            //}
+
+            //foreach (var item in one.OrderLine.ToList())
+            //{
+            //    db.OrderLine.Remove(item);
+            //}
+
+            db.OrderLine.RemoveRange(one.OrderLine);
+
+            db.Product.Remove(one);
+
+            db.SaveChanges();
+
+            return RedirectToAction("ReadProduct");
+        }
     }
 }
