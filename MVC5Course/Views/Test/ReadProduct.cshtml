@@ -8,6 +8,8 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    | @Html.ActionLink("有效", "ReadProduct", new { Active = true })
+    | @Html.ActionLink("無效", "ReadProduct", new { Active = false })
 </p>
 <table class="table">
     <tr>
