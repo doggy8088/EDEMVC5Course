@@ -193,6 +193,7 @@
     <Compile Include="Models\Client.cs">
       <DependentUpon>Fabrics.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDEViewModel.cs" />
     <Compile Include="Models\Fabrics.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -227,6 +228,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Elmah.Errors\ElmahErrors.txt" />
+    <Content Include="App_Data\Fabrics.mdf" />
+    <Content Include="App_Data\Fabrics_log.ldf">
+      <DependentUpon>Fabrics.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -306,6 +311,7 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Test\EDE.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
