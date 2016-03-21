@@ -26,8 +26,7 @@ namespace MVC5Course.Models
 
             if (this.Stock < 5)
             {
-                yield return new ValidationResult("庫存量過低，無法新增商品",
-                    new string[] { "Stock" });
+                yield return new ValidationResult("庫存量過低，無法新增商品");
             }
         }
     }
