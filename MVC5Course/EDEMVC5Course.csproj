@@ -209,6 +209,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Fabrics.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetProduct_Result.cs">
+      <DependentUpon>Fabrics.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Occupation.cs">
@@ -317,6 +320,7 @@
     <Content Include="Views\Test\ReadProduct.cshtml" />
     <Content Include="Views\Test\OneProduct.cshtml" />
     <Content Include="Views\Test\ProductView.cshtml" />
+    <Content Include="Views\Test\ProductSP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
