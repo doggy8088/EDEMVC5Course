@@ -5,15 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="aa58bc84d542446a9134651f0b6eb5d6" Name="Diagram1" ZoomLevel="114">
-        <EntityTypeShape EntityType="FabricsModel.Client" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FabricsModel.Occupation" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="FabricsModel.Order" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FabricsModel.OrderLine" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FabricsModel.Product" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="FabricsModel.FK_Client_Occupation" ManuallyRouted="false" />
-        <AssociationConnector Association="FabricsModel.fk_Order_ClientId" ManuallyRouted="false" />
-        <AssociationConnector Association="FabricsModel.fk_OrderLine_OrderId" ManuallyRouted="false" />
         <AssociationConnector Association="FabricsModel.fk_OrderLine_ProductId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FabricsModel.Client" Width="1.5" PointX="3.125" PointY="3.125" FillColor="Red" />
+        <AssociationConnector Association="FabricsModel.FK_Client_Occupation" />
+        <EntityTypeShape EntityType="FabricsModel.Order" Width="1.5" PointX="5.375" PointY="3.875" />
+        <AssociationConnector Association="FabricsModel.fk_Order_ClientId" />
+        <AssociationConnector Association="FabricsModel.fk_OrderLine_OrderId" />
+      </Diagram>
+      <Diagram DiagramId="64258ee2ab3a49648347d1a992fd8d52" Name="Diagram2" >
+        <EntityTypeShape EntityType="FabricsModel.Client" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="FabricsModel.Order" Width="1.5" PointX="3" PointY="2.125" />
+        <AssociationConnector Association="FabricsModel.fk_Order_ClientId" />
+        <EntityTypeShape EntityType="FabricsModel.OrderLine" Width="1.5" PointX="5.25" PointY="2.25" />
+        <AssociationConnector Association="FabricsModel.fk_OrderLine_OrderId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
