@@ -9,6 +9,15 @@ namespace MVC5Course.Models
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (this.ProductId == default(int))
+            {
+                // Create Data Only
+            }
+            else
+            {
+                // Update Data Only
+            }
+
             if (this.Stock > 10 && this.Price < 100)
             {
                 yield return new ValidationResult("價格設定錯誤",
