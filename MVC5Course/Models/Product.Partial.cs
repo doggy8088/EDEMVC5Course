@@ -18,16 +18,18 @@ namespace MVC5Course.Models
                 // Update Data Only
             }
 
-            if (this.Stock > 10 && this.Price < 100)
-            {
-                yield return new ValidationResult("價格設定錯誤",
-                    new string[] { "Price" });
-            }
+            //if (this.Stock > 10 && this.Price < 100)
+            //{
+            //    yield return new ValidationResult("價格設定錯誤",
+            //        new string[] { "Price" });
+            //}
 
-            if (this.Stock < 5)
-            {
-                yield return new ValidationResult("庫存量過低，無法新增商品");
-            }
+            //if (this.Stock < 5)
+            //{
+            //    yield return new ValidationResult("庫存量過低，無法新增商品");
+            //}
+
+            yield break;
         }
     }
 
@@ -38,7 +40,7 @@ namespace MVC5Course.Models
         
         [StringLength(80, ErrorMessage="欄位長度不得大於 80 個字元")]
         [Required]
-        [產品名稱必須至少包含兩個空白字元(ErrorMessage = "產品名稱必須至少包含兩個空白字元")]
+        //[產品名稱必須至少包含兩個空白字元(ErrorMessage = "產品名稱必須至少包含兩個空白字元")]
         public string ProductName { get; set; }
         [Required]
         public Nullable<decimal> Price { get; set; }

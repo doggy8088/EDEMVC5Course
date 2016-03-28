@@ -16,6 +16,10 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+
 <table class="table">
     <tr>
         <th>
@@ -32,27 +36,35 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+    @{ 
+        var data = Model.ToArray();
+    }
+@for(var i = 0; i < data.Length; i++)
+{
+    @Html.HiddenFor(modelItem => data[i].ProductId)
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
+            @Html.DisplayFor(modelItem => data[i].ProductName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Price)
+            @Html.EditorFor(modelItem => data[i].Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Active)
+            @Html.EditorFor(modelItem => data[i].Active)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Stock)
+            @Html.EditorFor(modelItem => data[i].Stock)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
+            @Html.ActionLink("Edit", "Edit", new { id=data[i].ProductId }) |
+            @Html.ActionLink("Details", "Details", new { id=data[i].ProductId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=data[i].ProductId })
         </td>
     </tr>
 }
 
 </table>
+
+
+    <input type="submit" value="批次更新資料" />
+}

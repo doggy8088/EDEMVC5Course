@@ -15,9 +15,37 @@ namespace MVC5Course.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var data = repoProduct.All();
+            var data = repoProduct.All().Take(5);
 
             return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult Index(IList<BatchUpdateProduct> data)
+        {
+            // 在 C# 中讀取資料的方式
+            // data[0].Price
+
+            // 原本在 View 顯示的每一筆欄位名稱
+            // item.Price
+            // item.Price
+
+            // 調整為多筆資料繫結可以接到資料的欄位名稱
+            // name="data[0].Price"
+            // name="data[1].Price"
+
+            foreach (var item in data)
+            {
+                var product = repoProduct.Find(item.ProductId);
+
+                product.Price = item.Price;
+                product.Active = item.Active;
+                product.Stock = item.Stock;
+            }
+
+            repoProduct.UnitOfWork.Commit();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Products/Details/5
