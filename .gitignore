@@ -187,3 +187,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/MVC5Course/App_Data/Elmah.Errors/error-*
+/.vs/config/applicationhost.config
