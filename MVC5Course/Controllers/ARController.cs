@@ -32,7 +32,8 @@ namespace MVC5Course.Controllers
 
         public ActionResult JsonTest(int id)
         {
-            repoProduct.UnitOfWork.Context.Configuration.LazyLoadingEnabled = false;
+            var db = repoProduct.UnitOfWork.Context;
+            db.Configuration.LazyLoadingEnabled = false;
             var product = repoProduct.Find(id);
 
             return Json(product, JsonRequestBehavior.AllowGet);

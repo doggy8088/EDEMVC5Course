@@ -87,6 +87,8 @@ namespace MVC5Course.Controllers
                 dbProduct.Entry(product).State = EntityState.Modified;
                 repoProduct.UnitOfWork.Commit();
 
+                TempData["ProductsEditMsg"] = product.ProductName + " 更新成功!";
+
                 return RedirectToAction("Index");
             }
             return View(product);
