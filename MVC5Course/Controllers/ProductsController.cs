@@ -34,18 +34,24 @@ namespace MVC5Course.Controllers
             // name="data[0].Price"
             // name="data[1].Price"
 
-            foreach (var item in data)
+            if (ModelState.IsValid)
             {
-                var product = repoProduct.Find(item.ProductId);
+                foreach (var item in data)
+                {
+                    var product = repoProduct.Find(item.ProductId);
 
-                product.Price = item.Price;
-                product.Active = item.Active;
-                product.Stock = item.Stock;
+                    product.Price = item.Price;
+                    product.Active = item.Active;
+                    product.Stock = item.Stock;
+                }
+
+                repoProduct.UnitOfWork.Commit();
+                return RedirectToAction("Index");
             }
 
-            repoProduct.UnitOfWork.Commit();
+            ViewData.Model = repoProduct.All().Take(5);
 
-            return RedirectToAction("Index");
+            return View();
         }
 
         // GET: Products/Details/5

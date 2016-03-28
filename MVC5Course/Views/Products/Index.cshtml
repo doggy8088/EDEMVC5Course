@@ -47,13 +47,16 @@
             @Html.DisplayFor(modelItem => data[i].ProductName)
         </td>
         <td>
-            @Html.EditorFor(modelItem => data[i].Price)
+            @Html.EditorFor(modelItem => data[i].Price)<br />
+            @Html.ValidationMessageFor(modelItem => data[i].Price, "", new { @class = "text-danger" })
         </td>
         <td>
-            @Html.EditorFor(modelItem => data[i].Active)
+            @Html.EditorFor(modelItem => data[i].Active)<br />
+            @Html.ValidationMessageFor(modelItem => data[i].Active, "", new { @class = "text-danger" })
         </td>
         <td>
-            @Html.EditorFor(modelItem => data[i].Stock)
+            @Html.EditorFor(modelItem => data[i].Stock)<br />
+            @Html.ValidationMessageFor(modelItem => data[i].Stock, "", new { @class = "text-danger" })
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=data[i].ProductId }) |
