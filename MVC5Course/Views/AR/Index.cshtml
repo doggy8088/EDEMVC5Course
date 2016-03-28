@@ -8,3 +8,18 @@
 <a href="@Url.Action("FileTest")?dl=1">
     <img src="@Url.Action("FileTest")" alt="Google LOGO" />
 </a>
+
+<button id="btnJsonTest">執行 JsonTest 並輸出到 Console 視窗</button>
+
+
+@section Scripts {
+    <script>
+        $("#btnJsonTest").on('click', function () {
+
+            $.get('@Url.Action("JsonTest", new { id = 1 })', "", function (data) {
+                console.log(data);
+            });
+
+        });
+    </script>
+}
