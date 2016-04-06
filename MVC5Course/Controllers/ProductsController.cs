@@ -10,6 +10,7 @@ using MVC5Course.Models;
 
 namespace MVC5Course.Controllers
 {
+    [計算Action的執行時間]
     public class ProductsController : BaseController
     {
         // GET: Products

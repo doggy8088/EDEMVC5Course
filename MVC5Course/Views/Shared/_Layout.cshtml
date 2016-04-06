@@ -37,7 +37,10 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
+            <p>
+                &copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式
+                ( 執行時間: @ViewBag.dtTimespan )
+            </p>
         </footer>
     </div>
 
