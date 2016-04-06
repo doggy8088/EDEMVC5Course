@@ -80,25 +80,6 @@ namespace <#= code.VsNamespaceSuggestion() #>
 		bool ProxyCreationEnabled { get; set; }
 		string ConnectionString { get; set; }
 	}
-}<#	fileManager.StartNewFile("RepositoryIQueryableExtensions.cs");
-#>using System.Data.Entity.Core.Objects;
-using System.Linq;
-
-namespace <#= code.VsNamespaceSuggestion() #>
-{
-	public static class RepositoryIQueryableExtensions
-	{
-		public static IQueryable<T> Include<T>
-			(this IQueryable<T> source, string path)
-		{
-			var objectQuery = source as ObjectQuery<T>;
-			if (objectQuery != null)
-			{
-				return objectQuery.Include(path);
-			}
-			return source;
-		}
-	}
 }<# fileManager.StartNewFile("EFRepository.cs");
 #>using System;
 using System.Data.Entity;

@@ -286,9 +286,6 @@
     <Compile Include="Models\RepositoryHelper.cs">
       <DependentUpon>IRepository.EF6.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RepositoryIQueryableExtensions.cs">
-      <DependentUpon>IRepository.EF6.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\產品名稱必須至少包含兩個空白字元Attribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
