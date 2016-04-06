@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ARController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\VTController.cs" />
     <Compile Include="Models\EditProfileViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -400,6 +401,8 @@
     <Content Include="Views\Test\ProductSP.cshtml" />
     <Content Include="Views\AR\Index.cshtml" />
     <Content Include="Views\Shared\Error2.cshtml" />
+    <Content Include="Views\VT\Index.cshtml" />
+    <Content Include="Views\VT\RazorTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
