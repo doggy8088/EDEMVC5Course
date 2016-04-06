@@ -39,5 +39,10 @@ namespace MVC5Course.Controllers
         {
             return View();
         }
+
+        public ActionResult NewIndex()
+        {
+            return View();
+        }
     }
 }
