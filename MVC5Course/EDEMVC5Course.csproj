@@ -403,6 +403,7 @@
     <Content Include="Views\Shared\Error2.cshtml" />
     <Content Include="Views\VT\Index.cshtml" />
     <Content Include="Views\VT\RazorTest.cshtml" />
+    <Content Include="Views\Home\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
