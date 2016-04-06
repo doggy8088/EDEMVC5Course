@@ -4,7 +4,7 @@
 
     <!-- start: Meta -->
     <meta charset="utf-8">
-    <title>Bootstrap Metro Dashboard by Dennis Ji for ARM demo</title>
+    <title>@ViewBag.Title</title>
     <meta name="description" content="Bootstrap Metro Dashboard">
     <meta name="author" content="Dennis Ji">
     <meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
@@ -368,10 +368,16 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="icon-home"></i>
-                        <a href="index.html">Home</a>
+                        <a href="@Url.Action("Index", "Home")">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
-                    <li><a href="#">Dashboard</a></li>
+
+                    @RenderSection("breadcrumb", false)
+                    @if (!IsSectionDefined("breadcrumb"))
+                    {
+                        <li><a href="#">N/A</a></li>
+                    }
+
                 </ul>
 
                 @RenderBody()
