@@ -399,6 +399,7 @@
     <Content Include="Views\Test\ProductView.cshtml" />
     <Content Include="Views\Test\ProductSP.cshtml" />
     <Content Include="Views\AR\Index.cshtml" />
+    <Content Include="Views\Shared\Error2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
