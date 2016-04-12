@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Details";
+    if (IsAjax)
+    {
+        Layout = "";
+    }
 }
 
 <h2>Details</h2>

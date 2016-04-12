@@ -36,6 +36,11 @@ namespace MVC5Course.Controllers
             return View(client.Take(10).ToList());
         }
 
+        public DateTime GetTime()
+        {
+            return DateTime.Now;
+        }
+
         // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {

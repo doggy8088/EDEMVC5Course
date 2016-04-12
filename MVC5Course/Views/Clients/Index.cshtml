@@ -14,6 +14,8 @@
         @Html.DropDownList("CreditRating", null, "--請選擇 Rating--", new { onchange = "this.form.submit();" })
 
         @Html.ActionLink("Create New", "Create")
+        | @Ajax.ActionLink("取得時間", "GetTime", new AjaxOptions() { UpdateTargetId="time" }): <span id="time"></span>
+        <span id="loading" style="display:none;"><img src="http://www.ajaxload.info/cache/FF/FF/FF/00/00/00/8-0.gif" /></span>
     </p>
     <table class="table">
         <tr>
@@ -61,7 +63,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ClientId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ClientId }) |
+                    @Ajax.ActionLink("Details", "Details", new { id = item.ClientId }, new AjaxOptions() { UpdateTargetId = "details", Confirm = "你確定嗎？", LoadingElementId = "loading" }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.ClientId })
                 </td>
             </tr>
@@ -69,3 +71,5 @@
 
     </table>
 }
+
+<div id="details"></div>
