@@ -11,7 +11,7 @@ using MVC5Course.Models;
 namespace MVC5Course.Controllers
 {
     [計算Action的執行時間]
-    [Authorize]
+    //[Authorize]
     public class ProductsController : BaseController
     {
         // GET: Products
@@ -69,6 +69,11 @@ namespace MVC5Course.Controllers
                 return HttpNotFound();
             }
             return View(product);
+        }
+
+        public ActionResult OrderLines(int ProductId)
+        {
+            return PartialView(repoProduct.Find(ProductId).OrderLine);
         }
 
         // GET: Products/Create
