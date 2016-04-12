@@ -85,7 +85,9 @@
     <script>
         $(function () {
             $('.pagination a').on('click', function () {
-                document.form1.page.value = $(this).text();
+                var href = $(this).attr('href');
+                var pid = href.substring(href.indexOf('?page=')+6);
+                document.form1.page.value = pid;
                 document.form1.submit();
                 return false;
             });
