@@ -3,6 +3,7 @@
     var db = new FabricsEntities();
     var rating_list = (from p in db.Client select p.CreditRating)
                       .Distinct().OrderBy(p => p).ToList();
+
     var CreditRating = new SelectList(rating_list, Model);
 }
-@Html.DropDownList("", CreditRating, "--請選擇 Rating--", new { onchange = "this.form.submit();" })
+@Html.DropDownList("", CreditRating, "--請選擇 Rating--")
