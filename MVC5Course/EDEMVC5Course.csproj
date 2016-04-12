@@ -437,6 +437,7 @@
     <Content Include="Views\Shared\EditorTemplates\Client.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CreditRating.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreditRatingRadioButton.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CreditRating.cshtml" />
   </ItemGroup>
   <ItemGroup>

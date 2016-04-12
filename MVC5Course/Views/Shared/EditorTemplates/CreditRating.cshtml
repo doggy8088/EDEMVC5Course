@@ -1,9 +1,8 @@
 ﻿@model double?
-
-@for (int i = 0; i < 10; i++)
-{
-    <label>
-        @Html.RadioButton("", i, Model.HasValue && Model.Value == i)
-        @i
-    </label>
+@{ 
+    var db = new FabricsEntities();
+    var rating_list = (from p in db.Client select p.CreditRating)
+                      .Distinct().OrderBy(p => p).ToList();
+    var CreditRating = new SelectList(rating_list, Model);
 }
+@Html.DropDownList("", CreditRating, "--請選擇 Rating--", new { onchange = "this.form.submit();" })
