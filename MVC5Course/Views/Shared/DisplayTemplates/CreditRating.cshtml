@@ -1,0 +1,9 @@
+﻿@model double?
+
+@if (Model.HasValue)
+{
+    for (int i = 0; i < Model.Value; i++)
+    {
+        <img src="https://www.xfamily.org/images/b/b8/Icon_star.gif" />
+    }
+}
