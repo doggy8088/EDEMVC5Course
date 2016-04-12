@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
+using PagedList;
 
 namespace MVC5Course.Controllers
 {
@@ -15,7 +16,7 @@ namespace MVC5Course.Controllers
         private FabricsEntities db = new FabricsEntities();
 
         // GET: Clients
-        public ActionResult Index(string Gender, double? CreditRating)
+        public ActionResult Index(string Gender, double? CreditRating, int page = 1)
         {
             var gender_list = new List<SelectListItem>();
             gender_list.Add(new SelectListItem() { Value = "M", Text = "男" });
@@ -33,7 +34,10 @@ namespace MVC5Course.Controllers
             if (CreditRating.HasValue) {
                 client = client.Where(p => p.CreditRating == CreditRating);
             }
-            return View(client.Take(10).ToList());
+
+            var data = client.OrderBy(p => p.ClientId).ToPagedList(page, 5);
+
+            return View(data);
         }
 
         public DateTime GetTime()

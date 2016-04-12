@@ -8,6 +8,7 @@
 
 @using (Html.BeginForm("Index", "Clients", FormMethod.Get, new { name = "form1" }))
 {
+    @Html.Hidden("page")
     <p>
         @Html.DropDownList("Gender", null, "--請選擇性別--", new { onchange = "this.form.submit();" })
 
@@ -15,7 +16,7 @@
 
         @Html.ActionLink("Create New", "Create")
         | @Ajax.ActionLink("取得時間", "GetTime", new AjaxOptions() { UpdateTargetId="time" }): <span id="time"></span>
-        <span id="loading" style="display:none;"><img src="http://www.ajaxload.info/cache/FF/FF/FF/00/00/00/8-0.gif" /></span>
+        <span id="loading" style="display:none;">Loading...</span>
     </p>
     <table class="table">
         <tr>
@@ -72,4 +73,22 @@
     </table>
 }
 
+@using PagedList
+@using PagedList.Mvc
+
+@Html.PagedListPager(Model as IPagedList, 
+    p => Url.Action("Index", new { page = p }))
+
 <div id="details"></div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('.pagination a').on('click', function () {
+                document.form1.page.value = $(this).text();
+                document.form1.submit();
+                return false;
+            });
+        });
+    </script>    
+}
