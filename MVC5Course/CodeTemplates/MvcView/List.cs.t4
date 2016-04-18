@@ -10,6 +10,8 @@ if(IsPartialView) {
 <#
 } else if(IsLayoutPageSelected) {
 #>
+@using PagedList
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "<#= ViewName#>";
@@ -117,6 +119,11 @@ if (pkName != null) {
 <#
 // The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
 #>
+
+
+@Html.PagedListPager(Model as IPagedList, p => Url.Action("Index", new { page = p }))
+
+
 <#
 if(!IsPartialView && !IsLayoutPageSelected) {
     ClearIndent();

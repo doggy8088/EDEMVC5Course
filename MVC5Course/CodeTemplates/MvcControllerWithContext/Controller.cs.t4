@@ -46,6 +46,8 @@ using System.Web.Mvc;
 <# foreach (var namespaceName in RequiredNamespaces) { #>
 using <#= namespaceName #>;
 <# } #>
+using PagedList;
+
 
 namespace <#= Namespace #>
 {
@@ -71,7 +73,7 @@ namespace <#= Namespace #>
         bindAttribute = String.Empty;
     }
 #>
-    public class <#= ControllerName #> : Controller
+    public class <#= ControllerName #> : BaseController
     {
         private <#= ContextTypeName #> db = new <#= ContextTypeName #>();
 
@@ -79,18 +81,19 @@ namespace <#= Namespace #>
 <# if (UseAsync) { #>
         public async Task<ActionResult> Index()
 <# } else { #>
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
 <# } #>
         {
 <#  var includeExpressions = "";
         includeExpressions = String.Join("", relatedProperties.Values.Select(property => String.Format(".Include({0} => {0}.{1})", lambdaVar, property.AssociationPropertyName)));
 #>
 <# if(!String.IsNullOrEmpty(includeExpressions)) { #>
-            var <#= entitySetVar #> = db.<#= entitySetName #><#= includeExpressions #>;
+            var <#= entitySetVar #> = db.<#= entitySetName #><#= includeExpressions #>.OrderBy(p => p.<#=primaryKeyName#>);
 <#		if (UseAsync) { #>
             return View(await <#= entitySetVar #>.ToListAsync());
 <#		} else { #>
-            return View(<#= entitySetVar #>.ToList());
+			var data = <#= entitySetVar #>.ToPagedList(page, 10);
+            return View(data);
 <#		} #>
 <# } else { #>
 <#		if (UseAsync) { #>

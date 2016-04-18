@@ -9,9 +9,10 @@ using System.Web.Mvc;
 using MVC5Course.Models;
 using PagedList;
 
+
 namespace MVC5Course.Controllers
 {
-    public class OrdersController : Controller
+    public class OrdersController : BaseController
     {
         private FabricsEntities db = new FabricsEntities();
 
@@ -19,9 +20,7 @@ namespace MVC5Course.Controllers
         public ActionResult Index(int page = 1)
         {
             var order = db.Order.Include(o => o.Client).OrderBy(p => p.OrderId);
-
-            var data = order.ToPagedList(page, 10);
-
+			var data = order.ToPagedList(page, 10);
             return View(data);
         }
 
