@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -24,6 +25,7 @@ namespace WebApi1.Controllers
 
         public IHttpActionResult GetProduct(int id)
         {
+
             var product = products.FirstOrDefault((p) => p.Id == id);
             if (product == null)
             {
